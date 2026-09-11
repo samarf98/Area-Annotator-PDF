@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PDF Room Area Annotator</title>
+<link rel="stylesheet" href="style.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <h1>PDF Area Annotator</h1>
+      <div class="upload-box">
+        <label class="upload-btn">
+          Upload PDF
+          <input type="file" id="fileInput" accept="application/pdf" hidden />
+        </label>
+        <p class="hint">Or open a saved drawing below</p>
+      </div>
+      <h2>Saved Drawings</h2>
+      <ul id="projectList" class="project-list"></ul>
+    </aside>
+
+    <main class="viewer">
+      <div class="toolbar">
+        <button id="oneClickBtn" class="tool-btn" disabled>One Click</button>
+        <button id="calibrateBtn" class="tool-btn" disabled>Manual Calibrate</button>
+        <button id="clearBtn" class="tool-btn" disabled>Clear Marks</button>
+        <span id="scaleInfo" class="scale-info"></span>
+        <div class="spacer"></div>
+        <button id="saveBtn" class="tool-btn primary" disabled>Save</button>
+      </div>
+      <div id="statusBar" class="status-bar"></div>
+      <div id="canvasWrap" class="canvas-wrap">
+        <canvas id="pdfCanvas"></canvas>
+        <canvas id="overlayCanvas"></canvas>
+        <div id="emptyState" class="empty-state">Upload a PDF or select a saved drawing to begin.</div>
+      </div>
+    </main>
+  </div>
+
+  <div id="saveModal" class="modal hidden">
+    <div class="modal-box">
+      <h3>Save Annotated Drawing</h3>
+      <label>Name</label>
+      <input type="text" id="nameInput" placeholder="e.g. Ground Floor Plan - Retail Areas" />
+      <label>Description</label>
+      <textarea id="descInput" placeholder="Short description..."></textarea>
+      <div class="modal-actions">
+        <button id="cancelSaveBtn" class="tool-btn">Cancel</button>
+        <button id="confirmSaveBtn" class="tool-btn primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="calibrateModal" class="modal hidden">
+    <div class="modal-box">
+      <h3>Manual Calibration</h3>
+      <p>Click two points on a line of known real-world length on the drawing, then enter that length.</p>
+      <label>Real-world length (meters)</label>
+      <input type="number" id="realLengthInput" step="0.01" placeholder="e.g. 8.6" />
+      <div class="modal-actions">
+        <button id="cancelCalibrateBtn" class="tool-btn">Cancel</button>
+        <button id="confirmCalibrateBtn" class="tool-btn primary">Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

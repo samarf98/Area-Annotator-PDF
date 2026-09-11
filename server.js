@@ -39,7 +39,7 @@ const upload = multer({
 });
 
 app.use(express.json({ limit: '15mb' }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 app.use('/uploads', express.static(UPLOAD_DIR));
 
 // Upload a PDF, get back a file id/url to reference when saving a project
